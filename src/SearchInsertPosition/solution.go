@@ -38,6 +38,30 @@ func main() {
 
 }
 
+// Uses Binary Search to find the target or the insert position
 func searchInsert(nums []int, target int) int {
-	return -1 // TODO: Implement
+	// ptrs to left and right search bounds of list
+	left, right := 0, len(nums)-1
+
+	// Binary Search
+	for left <= right {
+		mid := (left + right) / 2
+
+		if nums[mid] == target {
+			return mid
+		}
+
+		// target is greater than mid indx, search right half of array
+		if target > nums[mid] {
+			left = mid + 1
+		}
+
+		// target is less than mid indx, search left half of array
+		if target < nums[mid] {
+			right = mid - 1
+		}
+
+	}
+	// target was not found, return the indx to insert at
+	return left
 }
